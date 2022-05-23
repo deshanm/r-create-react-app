@@ -57,6 +57,15 @@ function verifyNoTypeScript() {
   return true;
 }
 
+type TsType = {
+  [key: string] : any;
+  JsxEmit: {
+    ReactJSX: string;
+    React: string,
+  }
+}
+
+
 function verifyTypeScriptSetup() {
   let firstTimeSetup = false;
 
@@ -71,7 +80,7 @@ function verifyTypeScriptSetup() {
   const isYarn = fs.existsSync(paths.yarnLockFile);
 
   // Ensure typescript is installed
-  let ts;
+  let ts: TsType;
   try {
     // TODO: Remove this hack once `globalThis` issue is resolved
     // https://github.com/jsdom/jsdom/issues/2961
@@ -112,6 +121,7 @@ function verifyTypeScriptSetup() {
     console.error();
     process.exit(1);
   }
+  
 
   const compilerOptions = {
     // These are suggested values and will be set when not present in the
