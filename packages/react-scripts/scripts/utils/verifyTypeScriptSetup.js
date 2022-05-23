@@ -148,7 +148,7 @@ function verifyTypeScriptSetup() {
     jsx: {
       parsedValue:
         hasJsxRuntime && semver.gte(ts.version, '4.1.0-beta')
-          ? ts.JsxEmit.ReactJSX
+          ? ts.JsxEmit.ReactJsx
           : ts.JsxEmit.React,
       value:
         hasJsxRuntime && semver.gte(ts.version, '4.1.0-beta')
