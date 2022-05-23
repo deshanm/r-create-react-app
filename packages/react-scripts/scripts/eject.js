@@ -190,10 +190,7 @@ prompts({
   }
   Object.keys(ownPackage.dependencies).forEach(key => {
     // For some reason optionalDependencies end up in dependencies after install
-    if (
-      ownPackage.optionalDependencies &&
-      ownPackage.optionalDependencies[key]
-    ) {
+    if (ownPackage.optionalDependencies[key]) {
       return;
     }
     console.log(`  Adding ${cyan(key)} to dependencies`);
