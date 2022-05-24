@@ -12,13 +12,23 @@ const url = require('url');
 const globalModules = require('global-modules');
 const fs = require('fs');
 
+type AppPackage = {
+  [key: string]: any;
+  scripts?: {
+    deploy: string;
+  }
+}
+const p: AppPackage = {}
+
+
 function printHostingInstructions(
-  appPackage,
-  publicUrl,
-  publicPath,
-  buildFolder,
-  useYarn
+  appPackage: AppPackage,
+  publicUrl: any,
+  publicPath: any,
+  buildFolder: any,
+  useYarn: any,
 ) {
+  
   if (publicUrl && publicUrl.includes('.github.io/')) {
     // "homepage": "http://user.github.io/project"
     const publicPathname = url.parse(publicPath).pathname;
