@@ -1059,7 +1059,7 @@ function checkIfOnline(useYarn) {
   }
 
   return new Promise(resolve => {
-    dns.lookup('registry.yarnpkg.com', err => {
+    dns.resolve('registry.yarnpkg.com', err => {
       let proxy;
       if (err != null && (proxy = getProxy())) {
         // If a proxy is defined, we likely can't resolve external hostnames.
