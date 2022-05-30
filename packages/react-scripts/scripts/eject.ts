@@ -27,6 +27,7 @@ const os = require('os');
 const green = chalk.green;
 const cyan = chalk.cyan;
 
+
 function getGitStatus() {
   try {
     let stdout = execSync(`git status --porcelain`, {
@@ -171,7 +172,18 @@ prompts({
   });
   console.log();
 
-  const ownPackage = require(path.join(ownPath, 'package.json'));
+  type OwnPackage = {
+    name: string;
+    dependencies: {
+      [key: string]: string;
+    };
+    optionalDependencies?: null | {
+      [key: string]: string;
+    };
+  }
+
+  
+  const ownPackage: OwnPackage = require(path.join(ownPath, 'package.json'));
   const appPackage = require(path.join(appPath, 'package.json'));
 
   console.log(cyan('Updating the dependencies'));
@@ -190,10 +202,7 @@ prompts({
   }
   Object.keys(ownPackage.dependencies).forEach(key => {
     // For some reason optionalDependencies end up in dependencies after install
-    if (
-      ownPackage.optionalDependencies &&
-      ownPackage.optionalDependencies[key]
-    ) {
+    if (ownPackage.optionalDependencies[key]) {
       return;
     }
     console.log(`  Adding ${cyan(key)} to dependencies`);
